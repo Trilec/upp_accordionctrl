@@ -1,0 +1,12 @@
+description "AccordionCtrl UI Demo & Test Suite\377";
+
+uses
+	CtrlLib,
+	AccordionCtrl;
+
+file
+	main.cpp;
+
+mainconfig
+	"" = "";
+

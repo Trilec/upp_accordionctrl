@@ -1,0 +1,10 @@
+description "U++ AccordionCtrl — Chameleon-styled, Accordion container\377";
+
+uses
+	Core,
+	CtrlLib;
+
+file
+	AccordionCtrl.h,
+	AccordionCtrl.cpp;
+

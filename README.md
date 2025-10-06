@@ -37,3 +37,7 @@ for (int i = 0; i < 5; ++i) {
     btn.SetLabel(Format("Btn%d", i));
     toolbar.Add(btn, -1, true, Size(80, 28));
 }
+```
+#### Demo
+
+<img width="750" height="390" alt="image" src="https://github.com/user-attachments/assets/f5e9b3d7-efa0-4eb6-99d3-4c088e9125c4" />

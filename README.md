@@ -40,4 +40,4 @@ for (int i = 0; i < 5; ++i) {
 ```
 #### Demo
 
-<img width="750" height="390" alt="image" src="https://github.com/user-attachments/assets/f5e9b3d7-efa0-4eb6-99d3-4c088e9125c4" />
+<img width="1219" height="480" alt="image" src="https://github.com/user-attachments/assets/0d0e4873-f64f-4af3-9bd1-9d3d21b15030" />

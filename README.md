@@ -1,43 +1,70 @@
-# FlowGridLayout
+# `AccordionCtrl`
 
-A unified flow and grid layout control for Ultimate++ that combines the flexibility of flow layouts with optional grid placement, designed for modern UI patterns like toolbars, ribbons, galleries, and form layouts.
+**Collapsible section control for U++ (Ultimate++) applications.**
 
-## Features
+`AccordionCtrl` is a customizable container that manages a list of collapsible sections, allowing users to show or hide content panels efficiently. It provides standard accordion behavior with features like single-item expansion, optional animation, and locking sections in a fixed state.
 
-- **Flow-first layout** with automatic wrapping and primary-axis packing
-- **Minimal API** — three enums, simple methods, clear defaults
-- **Spacers & Expanders** — flexible spacing primitives that absorb leftover space
-- **Clusters** — keep-together blocks that drop as units or allow internal wrapping
-- **Virtual mode** — efficient rendering for large datasets (10k+ items) via callbacks
-- **Grid placement** — optional explicit row/column positioning for specific items
-- **Segmentation** — category dividers and headers for grouped content
-- **Scrollbars** — integrated with configurable modes (Auto, Vertical, Horizontal, None)
-- **Performance** — O(n) layout, zero per-paint heap allocations
+-----
 
-## Quick Start
+## ✨ Features
 
-### Basic Flow Layout (Toolbar)
+  * **Collapsible Sections:** Easily add and manage sections with distinct headers and content bodies.
+  * **Single/Multi Expand Modes:** Configure the control to allow multiple sections open simultaneously, or enforce a classic accordion behavior where opening one closes all others (`SingleExpand`).
+  * **Per-Section Locking:** Lock individual sections in an open or closed state, preventing user interaction from changing their status.
+  * **Built-in Animation:** Smooth open/close animations are enabled by default and are fully configurable, including separate durations for opening and closing.
+  * **Keyboard Navigation:** Full support for keyboard interaction (`Up`/`Down`/`Home`/`End` to navigate headers; `Space`/`Enter` to toggle).
+  * **Customizable Style:** Uses U++'s **Chameleon** styling system for seamless integration with application themes.
+  * **Header Widgets:** Supports adding interactive controls (like `Option` or `Button`) directly into the header pane without interfering with the toggle action.
+
+-----
+
+## 🛠️ Usage
+
+To incorporate `AccordionCtrl` into your application, you typically add sections and populate their body controls:
 
 ```cpp
-#include "FlowGridLayout.h"
+#include <AccordionCtrl/AccordionCtrl.h>
+using namespace Upp;
 
-FlowGridLayout toolbar;
-toolbar.SetMode(FGLMode::Flow).SetWrap(true);
+// ... inside a ParentCtrl or TopWindow
+AccordionCtrl accordion;
+Add(accordion.SizePos()); // Add the control to your window
 
-// Left: title
-Label& title = *new Label("My App");
-toolbar.Add(title);
+// Add sections
+int section0 = accordion.AddSection("General Settings");
+int section1 = accordion.AddSection("Advanced Options");
 
-// Middle: flexible space
-toolbar.AddExpander();
+// Get the body control for a section and add widgets
+ParentCtrl& body0 = accordion.BodyCtrl(section0);
+body0.Add(EditString().HSizePos(10, 10).TopPos(5, 24)); // Example widget
 
-// Right: buttons
-for (int i = 0; i < 5; ++i) {
-    Button& btn = *new Button();
-    btn.SetLabel(Format("Btn%d", i));
-    toolbar.Add(btn, -1, true, Size(80, 28));
-}
+// Configure behavior
+accordion.SingleExpand(true);
+accordion.SetAnimationEnabled(true);
+
+// Open a section on startup
+accordion.Open(section0, false);
 ```
-#### Demo
 
-<img width="1219" height="480" alt="image" src="https://github.com/user-attachments/assets/0d0e4873-f64f-4af3-9bd1-9d3d21b15030" />
+### Key Configuration Methods:
+
+| Method | Description |
+| :--- | :--- |
+| `SingleExpand(bool b)` | If `true`, only one section can be open at a time. |
+| `AtLeastOneOpen(bool b)` | If `true`, prevents the last open section from being closed. |
+| `SetLocked(int i, bool lock)` | Locks section `i` in its current open/closed state. |
+| `SetAnimationEnabled(bool on)` | Toggles smooth animations for opening and closing. |
+
+-----
+
+## 🧪 Demo Status
+
+<img width="758" height="447" alt="image" src="https://github.com/user-attachments/assets/3f20a7ae-cc1e-4123-80f9-289df5127f44" />
+
+The demo showcases various features, including the use of **header widgets** (like the **Lock** checkboxes in the demo) and **animation controls**.
+
+The control is currently **compiling and semi-stable**, but the demo may undergo minor changes as styling and advanced features are refined.
+
+-----
+
+Feel free to open an issue if you encounter any problems or have suggestions\!
